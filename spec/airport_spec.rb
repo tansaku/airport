@@ -11,7 +11,7 @@ require 'debugger'
 describe Airport do
   let(:airport) { Airport.new }
   let(:plane) { Plane.new }
-  before(:each) {airport.stub(:weather).and_return :sunny}
+  
   
   context 'taking off and landing' do
     it 'a plane can land' do
@@ -26,6 +26,7 @@ describe Airport do
   
   context 'traffic control' do
     it 'a plane cannot land if the airport is full' do
+      airport.stub(:weather).and_return :sunny
       1..5.times do 
         p = Plane.new
         airport.land(p)
@@ -72,7 +73,7 @@ describe Airport do
       it 'is stormy 30% of the time' do
         Airport::ARRAY.should_receive(:sample).and_return :stormy
         #expect().to receive :sample
-        expect(airport.weather_check).to eq :stormy
+        expect(airport.weather).to eq :stormy
       end
     end
   end

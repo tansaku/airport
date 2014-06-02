@@ -7,7 +7,7 @@ class Airport
     @planes = []
     @weather = :sunny
   end
-  def weather_check
+  def weather
     @weather = ARRAY.sample
     @weather
   end
@@ -19,6 +19,7 @@ class Airport
   def takeoff(plane)
     return "Unable to take off" if unable_to_takeoff?
     plane.takeoff
+    @planes.delete plane
   end
   def full?
     if @planes.count >= 5
